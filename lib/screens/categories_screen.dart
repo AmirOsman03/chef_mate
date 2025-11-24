@@ -1,7 +1,7 @@
 import 'package:chef_mate/models/category.dart';
-import 'package:chef_mate/screens/meals_screen.dart';
+import 'package:chef_mate/widgets/categories/category_list.dart';
+import 'package:chef_mate/widgets/categories/category_search_bar.dart';
 import 'package:chef_mate/services/api_meal_service.dart';
-import 'package:chef_mate/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -62,39 +62,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ? const Center(child: CircularProgressIndicator())
           : Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: TextField(
-                    onChanged: searchCategories,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search),
-                      hintText: 'Search categories...',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: filteredCategories.length,
-                    itemBuilder: (context, index) {
-                      final category = filteredCategories[index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  MealsScreen(categoryName: category.name),
-                            ),
-                          );
-                        },
-                        child: CategoryCard(category: category),
-                      );
-                    },
-                  ),
-                ),
+                CategorySearchBar(onSearch: searchCategories),
+                CategoryList(categories: filteredCategories),
               ],
             ),
     );

@@ -1,17 +1,25 @@
-# chef_mate
+# 🍔 Chef Mate 
 
-A new Flutter project.
+**Chef Mate** is a Flutter mobile application that helps you explore meal recipes by category, search for meals, and view detailed instructions with ingredients. You can also watch recipe videos on YouTube.  
 
-## Getting Started
+## ✨ Features  
+- Browse meal categories
+- Search meals by name
+- View detailed recipe: ingredients, instructions, and image
+- Watch YouTube cooking videos
+- Get a random meal of the day
 
-This project is a starting point for a Flutter application.
+## 🛠️ Tech Stack  
+- **Framework:** Flutter (Dart)
 
-A few resources to get you started if this is your first Flutter project:
+## 🖼️ Screens
+- **Categories Screen**  
+<img src="screenshots/meal_categories_screen.png" alt="Home" width="300"/>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Meals Screen**  
+<img src="screenshots/meals_screen.png" alt="Meals screen" width="300"/>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# chef_mate
+- **Meals Details Screen**  
+<img src="screenshots/meal_details_screen.png" alt="Meal details" width="300"/>
+<img src="screenshots/meal_details_with_youtube_button.png" alt="Meal details" width="300"/>
+

@@ -1,4 +1,6 @@
 import 'package:chef_mate/screens/meal_details_screen.dart';
+import 'package:chef_mate/widgets/meals/meal_grid.dart';
+import 'package:chef_mate/widgets/meals/meals_search_bar.dart';
 import 'package:chef_mate/services/api_meal_service.dart';
 import 'package:flutter/material.dart';
 
@@ -45,9 +47,10 @@ class _MealsScreenState extends State<MealsScreen> {
   void showRandomMeal() async {
     Meal randomMeal = await ApiService.getRandomMeal();
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (_) => MealDetailsScreen(mealId: randomMeal.id)),
+      context,
+      MaterialPageRoute(
+        builder: (_) => MealDetailsScreen(mealId: randomMeal.id),
+      ),
     );
   }
 
@@ -57,79 +60,20 @@ class _MealsScreenState extends State<MealsScreen> {
       appBar: AppBar(
         title: Text(widget.categoryName),
         actions: [
-          IconButton(onPressed: showRandomMeal, icon: const Icon(Icons.casino))
+          IconButton(onPressed: showRandomMeal, icon: const Icon(Icons.casino)),
         ],
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: TextField(
-              controller: searchController,
-              decoration: InputDecoration(
-                hintText: 'Search meals...',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
+              children: [
+                MealsSearchBar(
+                  controller: searchController,
+                  onSearch: searchMeals,
                 ),
-              ),
-              onChanged: searchMeals,
+                MealGrid(meals: filteredMeals),
+              ],
             ),
-          ),
-          Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(12),
-              itemCount: filteredMeals.length,
-              gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.8,
-              ),
-              itemBuilder: (context, index) {
-                final meal = filteredMeals[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) =>
-                            MealDetailsScreen(mealId: meal.id),
-                      ),
-                    );
-                  },
-                  child: Card(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Expanded(
-                          child: Image.network(
-                            meal.thumbnail,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            meal.name,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
