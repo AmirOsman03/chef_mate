@@ -32,7 +32,7 @@ class MealGrid extends StatelessWidget {
                   builder: (_) => MealDetailsScreen(mealId: meal.id),
                 ),
               );
-            },
+            }, onFavoriteToggle: (Meal p1) {  },
           );
         },
       ),

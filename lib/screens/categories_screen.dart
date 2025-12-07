@@ -1,4 +1,6 @@
 import 'package:chef_mate/models/category.dart';
+import 'package:chef_mate/models/meal.dart';
+import 'package:chef_mate/screens/favorite_screen.dart';
 import 'package:chef_mate/widgets/categories/category_list.dart';
 import 'package:chef_mate/widgets/categories/category_search_bar.dart';
 import 'package:chef_mate/services/api_meal_service.dart';
@@ -12,6 +14,7 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
+  List<Meal> allMeals = [];
   List<Category> categories = [];
   List<Category> filteredCategories = [];
   bool isLoading = true;
@@ -20,6 +23,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   void initState() {
     super.initState();
     fetchCategories();
+    fetchMeals();
   }
 
   void fetchCategories() async {
@@ -57,6 +61,20 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           'Meal Categories',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            color: Colors.red,
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FavoriteScreen(meals: []),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -67,5 +85,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               ],
             ),
     );
+  }
+
+  void fetchMeals() async {
+    allMeals = await ApiService.getMealsByCategory();
   }
 }
