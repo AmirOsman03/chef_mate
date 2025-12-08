@@ -1,8 +1,14 @@
 import 'package:chef_mate/screens/categories_screen.dart';
+import 'package:chef_mate/services/favorites_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MealApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(
+    ChangeNotifierProvider(create: (_) => FavoritesService(), child: const MealApp()),
+  );
 }
 
 class MealApp extends StatelessWidget {
@@ -10,13 +16,6 @@ class MealApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Chef Mate",
-      theme: ThemeData(
-        primarySwatch: Colors.brown,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: const CategoriesScreen(),
-    );
+    return MaterialApp(title: 'Chef Mate', home: const CategoriesScreen());
   }
 }
