@@ -46,6 +46,7 @@ class _MealsScreenState extends State<MealsScreen> {
 
   void showRandomMeal() async {
     Meal randomMeal = await ApiService.getRandomMeal();
+    if (!mounted) return;
     Navigator.push(
       context,
       MaterialPageRoute(
