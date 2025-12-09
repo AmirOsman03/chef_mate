@@ -40,7 +40,7 @@ class _MealCardState extends State<MealCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onTap,
-      child: SizedBox( // 💡 КЛУЧНО: Додадете SizedBox за да ја дефинирате висината на картичката
+      child: SizedBox(
         height: 250,
         child: Card(
           elevation: 6,

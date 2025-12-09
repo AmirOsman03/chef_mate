@@ -43,3 +43,16 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase config files
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# iOS build и pods
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/Runner.xcworkspace/
+
+# FlutterFire generated file (може да се пушти)
+lib/firebase_options.dart
