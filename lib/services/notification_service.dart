@@ -25,7 +25,7 @@ class NotificationService {
     tz.setLocalLocation(tz.getLocation('Europe/Skopje'));
 
     final now = tz.TZDateTime.now(tz.local);
-    final scheduleTime = tz.TZDateTime(tz.local, now.year, now.month, now.day, 20, 52);
+    final scheduleTime = tz.TZDateTime(tz.local, now.year, now.month, now.day, 15, 34);
 
     Meal meal = await ApiService.getRandomMeal();
 
@@ -45,6 +45,8 @@ class NotificationService {
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
+
+    debugPrint('нотификација закажана за: $scheduleTime');
   }
 
   /// Тестна нотификација за 1-2 минути од сега

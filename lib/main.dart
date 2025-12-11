@@ -14,7 +14,7 @@ void main() async {
   );
 
   await NotificationService.init();
-  await NotificationService.scheduleTestNotification();
+  await NotificationService.scheduleDailyRecipe();
 
   runApp(
     ChangeNotifierProvider(create: (_) => FavoritesService(), child: const MealApp()),
