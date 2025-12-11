@@ -41,4 +41,5 @@ class Meal {
       youtubeLink: json['strYoutube'] ?? '',
     );
   }
+
 }

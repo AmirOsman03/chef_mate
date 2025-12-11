@@ -1,4 +1,5 @@
 import 'package:chef_mate/models/category.dart';
+import 'package:chef_mate/screens/favorite_screen.dart';
 import 'package:chef_mate/widgets/categories/category_list.dart';
 import 'package:chef_mate/widgets/categories/category_search_bar.dart';
 import 'package:chef_mate/services/api_meal_service.dart';
@@ -57,6 +58,17 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           'Meal Categories',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const FavoriteScreen()),
+              );
+            },
+            icon: Icon(Icons.favorite, color: Colors.red),
+          ),
+        ],
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())

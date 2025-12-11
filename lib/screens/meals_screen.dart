@@ -1,3 +1,4 @@
+import 'package:chef_mate/repository/meal_repository.dart';
 import 'package:chef_mate/screens/meal_details_screen.dart';
 import 'package:chef_mate/widgets/meals/meal_grid.dart';
 import 'package:chef_mate/widgets/meals/meals_search_bar.dart';
@@ -28,7 +29,7 @@ class _MealsScreenState extends State<MealsScreen> {
   }
 
   void fetchMeals() async {
-    meals = await ApiService.getMealsByCategory(widget.categoryName);
+    meals = await MealsRepository().getMeals(widget.categoryName);
     filteredMeals = List.from(meals);
     setState(() {
       isLoading = false;
@@ -46,6 +47,7 @@ class _MealsScreenState extends State<MealsScreen> {
 
   void showRandomMeal() async {
     Meal randomMeal = await ApiService.getRandomMeal();
+    if (!mounted) return;
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -57,6 +59,7 @@ class _MealsScreenState extends State<MealsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
         title: Text(widget.categoryName),
         actions: [
